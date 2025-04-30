@@ -1,49 +1,98 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Artikel;
-use Illuminate\Support\Facades\Storage;
-use DataTables;
+use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
     public function index()
     {
-        return view('artikel.layout'); // halaman Blade yang sudah kamu buat
+        $artikel = Artikel::all();
+        return view('artikel.layout', compact('artikel'));
     }
-    public function data(Request $request)
-{
-    try {
-        $data = Artikel::select(['id_artikel', 'gambar', 'kategori', 'judul', 'company', 'tanggal']);
-        return datatables()->of($data)->make(true);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
-}
 
-
-    public function add()
+    public function create()
     {
-        return view('artikel.add'); // tampilkan form tambah artikel
+        return view('artikel.add');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'company' => 'required',
+            'kategori' => 'required',
+            'judul' => 'required',
+            'isi' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'tanggal' => 'required|date',
+        ]);
+
+        // Simpan gambar
+        $gambarPath = $request->file('gambar')->store('artikel', 'public');
+
+        // Insert data ke database
+        Artikel::create([
+            'company' => $request->company,
+            'kategori' => $request->kategori,
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'gambar' => $gambarPath,
+            'tanggal' => $request->tanggal,
+        ]);
+
+        return redirect()->route('artikel.layout')->with('success', 'Artikel berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $artikel = Artikel::findOrFail($id);
+        $artikel = Artikel::findOrFail($id); // gunakan id_artikel kalau pakai custom primary key
         return view('artikel.edit', compact('artikel'));
     }
 
-    public function delete($id)
+    public function update(Request $request, $id)
     {
         $artikel = Artikel::findOrFail($id);
-        if ($artikel->gambar && Storage::disk('public')->exists('artikel/' . $artikel->gambar)) {
-            Storage::disk('public')->delete('artikel/' . $artikel->gambar);
+
+        $request->validate([
+            'company' => 'required',
+            'kategori' => 'required',
+            'judul' => 'required',
+            'tanggal' => 'required|date',
+            'isi' => 'required',
+            'gambar' => 'nullable|image|max:2048',
+        ]);
+
+        $artikel->company = $request->company;
+        $artikel->kategori = $request->kategori;
+        $artikel->judul = $request->judul;
+        $artikel->tanggal = $request->tanggal;
+        $artikel->isi = $request->isi;
+
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('artikel', 'public');
+            $artikel->gambar = $path;
         }
-        $artikel->delete();
-        return redirect()->route('artikel.layout')->with('success', 'Artikel berhasil dihapus');
+
+        $artikel->save();
+        return redirect()->route('artikel.layout')->with('success', 'Artikel berhasil diperbarui!');
     }
 
-    // Tambahkan store dan update jika ingin lengkap.
+
+    public function destroy($id)
+    {
+        $artikel = Artikel::findOrFail($id);
+        $artikel->delete();
+        Artikel::reorderIdArtikel();
+        return redirect()->route('artikel.layout')->with('success', 'Artikel berhasil dihapus.');
+    }
+    public function add()
+    {
+        return view('artikel.add'); // tampilkan form tambah artikel
+    }
+    public function detail($id)
+    {
+        $artikel = Artikel::where('id_artikel', $id)->firstOrFail();
+        return view('artikel.detail', compact('artikel'));
+    }
 }
 
