@@ -63,10 +63,13 @@ class ReservasiSurveyController extends Controller
 
     public function detail($id)
     {
-        $reservasi = Reservasi_survey::with('reservasi_lokasi')->findOrFail($id);
+        $reservasi = Reservasi_survey::with([
+            'reservasiLokasi.lokasi.gambarLokasi'
+        ])->findOrFail($id);
+
         return view('reservasi_survey.detail', compact('reservasi'));
     }
-
+    
     public function destroy($id)
     {
         $reservasi = Reservasi_lokasi::findOrFail($id);
