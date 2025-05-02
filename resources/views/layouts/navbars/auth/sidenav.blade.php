@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'artikel.layout' ? 'active' : '' }}" href="{{ route('artikel.layout') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'tipe_rumah.layout' ? 'active' : '' }}" href="{{ route('tipe_rumah.layout') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-building text-info text-sm opacity-10"></i>
                     </div>
