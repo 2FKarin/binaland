@@ -25,7 +25,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ArtikelController;
-use App\Http\Controllers\LokasiController;       
+use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\TipeRumahController;       
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -53,7 +54,14 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
     Route::put('/lokasi/{id}', [LokasiController::class, 'update'])->name('lokasi.update')->middleware('auth');
     Route::delete('/lokasi/destroy/{id}', [LokasiController::class, 'destroy'])->name('lokasi.destroy')->middleware('auth');
     Route::get('/lokasi/detail/{id}', [LokasiController::class, 'detail'])->name('lokasi.detail')->middleware('auth');
-
+	//Menu Tipe Rumah dan Gambarnya
+	Route::get('/tipe_rumah', [TipeRumahController::class, 'index'])->name('tipe_rumah.layout')->middleware('auth');
+	Route::get('/tipe_rumah/add', [TipeRumahController::class, 'add'])->name('tipe_rumah.add')->middleware('auth');
+	Route::post('/tipe_rumah/store', [TipeRumahController::class, 'store'])->name('tipe_rumah.store')->middleware('auth');
+	Route::get('/tipe_rumah/edit/{id}', [TipeRumahController::class, 'edit'])->name('tipe_rumah.edit')->middleware('auth');
+	Route::put('/tipe_rumah/{id}', [TipeRumahController::class, 'update'])->name('tipe_rumah.update')->middleware('auth');
+	Route::delete('/tipe_rumah/destroy/{id}', [TipeRumahController::class, 'destroy'])->name('tipe_rumah.destroy')->middleware('auth');
+	Route::get('/tipe_rumah/detail/{id}', [TipeRumahController::class, 'detail'])->name('tipe_rumah.detail')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
