@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'artikel.layout' ? 'active' : '' }}" href="{{ route('artikel.layout') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'reservasi_survey.layout' ? 'active' : '' }}" href="{{ route('reservasi_survey.layout') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-calendar-grid-58  text-info text-sm opacity-10"></i>
                     </div>
@@ -54,7 +54,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'artikel.layout' ? 'active' : '' }}" href="{{ route('artikel.layout') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'fasilitas.layout' ? 'active' : '' }}" href="{{ route('fasilitas.layout') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-settings text-info text-sm opacity-10"></i>
                     </div>
