@@ -87,7 +87,7 @@ class ArtikelController extends Controller
     }
     public function add()
     {
-        return view('artikel.add'); // tampilkan form tambah artikel
+        return view('artikel.add');
     }
     public function detail($id)
     {
