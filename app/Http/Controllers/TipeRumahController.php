@@ -24,26 +24,26 @@ class TipeRumahController extends Controller
     {
         $request->validate([
             'fk_id_lokasi' => 'required|exists:lokasi,id_lokasi',
-            'nama_lokasi' => 'required|string|max:255',
+            'nama_tipe' => 'required|string|max:255',
             'luas_bangunan' => 'required|numeric',
             'luas_tanah' => 'required|numeric',
             'harga' => 'required|numeric',
             'jumlah_kamar' => 'required|integer',
             'jumlah_kamar_mandi' => 'required|integer',
-            'fasilitas_unggunlan' => 'required|string',
+            'fasilitas_unggulan' => 'required|string',
             'is_promo' => 'required|in:0,1',
             'gambar.*' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $tipe = Tipe_rumah::create([
             'fk_id_lokasi' => $request->fk_id_lokasi,
-            'nama_lokasi' => $request->nama_lokasi,
+            'nama_tipe' => $request->nama_tipe,
             'luas_bangunan' => $request->luas_bangunan,
             'luas_tanah' => $request->luas_tanah,
             'harga' => $request->harga,
             'jumlah_kamar' => $request->jumlah_kamar,
             'jumlah_kamar_mandi' => $request->jumlah_kamar_mandi,
-            'fasilitas_unggulan' => $request->bonus,
+            'fasilitas_unggulan' => $request->fasilitas_unggulan,
             'is_promo' => $request->is_promo
         ]);
 
@@ -61,11 +61,13 @@ class TipeRumahController extends Controller
     }
 
     // Tambahan fungsi untuk CRUD lainnya
-    public function show($id)
+
+    public function detail($id)
     {
-        $tipe = Tipe_rumah::with(['lokasi', 'gambarRumah'])->findOrFail($id);
-        return view('tipe_rumah.show', compact('tipe'));
+        $tipeRumah = Tipe_rumah::with(['gambarRumah', 'lokasi'])->findOrFail($id);
+        return view('tipe_rumah.detail', compact('tipeRumah'));
     }
+
 
     public function destroy($id)
     {
@@ -75,7 +77,52 @@ class TipeRumahController extends Controller
 
     public function edit($id)
     {
-        $tipe = Tipe_rumah::findOrFail($id);
-        return view('tipe_rumah.edit', compact('tipe'));
+        $tipeRumah = Tipe_rumah::findOrFail($id);
+        $lokasi = Lokasi::all();
+        $gambarRumah = $tipeRumah->gambarRumah;
+
+        return view('tipe_rumah.edit', compact('tipeRumah', 'lokasi', 'gambarRumah'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'fk_id_lokasi' => 'required|exists:lokasi,id_lokasi',
+            'nama_tipe' => 'required|string|max:255',
+            'luas_bangunan' => 'required|numeric',
+            'luas_tanah' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'jumlah_kamar' => 'required|integer',
+            'jumlah_kamar_mandi' => 'required|integer',
+            'fasilitas_unggulan' => 'required|string',
+            'is_promo' => 'required|boolean',
+            'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+    
+        $tipeRumah = Tipe_rumah::findOrFail($id);
+        $tipeRumah->update([
+            'fk_id_lokasi' => $request->fk_id_lokasi,
+            'nama_tipe' => $request->nama_tipe,
+            'luas_bangunan' => $request->luas_bangunan,
+            'luas_tanah' => $request->luas_tanah,
+            'harga' => $request->harga,
+            'jumlah_kamar' => $request->jumlah_kamar,
+            'jumlah_kamar_mandi' => $request->jumlah_kamar_mandi,
+            'fasilitas_unggulan' => $request->fasilitas_unggulan,
+            'is_promo' => $request->is_promo,
+        ]);
+    
+        if ($request->hasFile('gambar')) {
+            foreach ($request->file('gambar') as $file) {
+                $path = $file->store('gambar_rumah', 'public');
+    
+                $tipeRumah->gambarRumah()->create([
+                    'nama_file' => $path,
+                ]);
+            }
+        }
+    
+        return redirect()->route('tipe_rumah.layout')->with('success', 'Tipe rumah berhasil diperbarui.');
+    }
+    
 }
