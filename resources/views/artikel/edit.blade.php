@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Edit Artikel'])
+@include('layouts.navbars.auth.topnav', ['title' => 'Edit Tipe Rumah'])
 
 <div class="container-fluid py-4">
     <div class="row">
@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
-                        <p class="mb-0">Edit Artikel</p>
+                        <p class="mb-0">Edit Tipe Rumah</p>
                     </div>
                 </div>
                 <div class="card-body">
@@ -20,61 +20,104 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('artikel.update', $artikel->id_artikel) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('tipe_rumah.update', $tipeRumah->id_tipe_rumah) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <!-- Company -->
+                            <!-- Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Company</label>
-                                    <select name="company" class="form-control" required>
-                                        <option value="">-- Pilih Company --</option>
-                                        <option value="Binaland" {{ $artikel->company == 'Binaland' ? 'selected' : '' }}>Binaland</option>
-                                        <option value="Superland" {{ $artikel->company == 'Superland' ? 'selected' : '' }}>Superland</option>
+                                    <label>Lokasi</label>
+                                    <select name="fk_id_lokasi" class="form-control" required>
+                                        <option value="">-- Pilih Lokasi --</option>
+                                        @foreach($lokasi as $l)
+                                            <option value="{{ $l->id_lokasi }}" {{ $tipeRumah->fk_id_lokasi == $l->id_lokasi ? 'selected' : '' }}>
+                                                {{ $l->nama_lokasi }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <!-- Kategori -->
+                            <!-- Nama Tipe -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Kategori</label>
-                                    <input type="text" name="kategori" class="form-control" value="{{ $artikel->kategori }}" required>
+                                    <label>Nama Tipe Rumah</label>
+                                    <input type="text" name="nama_tipe" class="form-control" value="{{ $tipeRumah->nama_tipe }}" required>
                                 </div>
                             </div>
 
-                            <!-- Judul -->
+                            <!-- Luas Bangunan -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Judul</label>
-                                    <input type="text" name="judul" class="form-control" value="{{ $artikel->judul }}" required>
+                                    <label>Luas Bangunan (m²)</label>
+                                    <input type="number" name="luas_bangunan" class="form-control" value="{{ $tipeRumah->luas_bangunan }}" required>
                                 </div>
                             </div>
 
-                            <!-- Tanggal -->
+                            <!-- Luas Tanah -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Tanggal</label>
-                                    <input type="date" name="tanggal" class="form-control" value="{{ $artikel->tanggal }}" required>
+                                    <label>Luas Tanah (m²)</label>
+                                    <input type="number" name="luas_tanah" class="form-control" value="{{ $tipeRumah->luas_tanah }}" required>
                                 </div>
                             </div>
 
-                            <!-- Isi -->
+                            <!-- Harga -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Harga</label>
+                                    <input type="number" name="harga" class="form-control" value="{{ $tipeRumah->harga }}" required>
+                                </div>
+                            </div>
+
+                            <!-- Jumlah Kamar -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Jumlah Kamar</label>
+                                    <input type="number" name="jumlah_kamar" class="form-control" value="{{ $tipeRumah->jumlah_kamar }}" required>
+                                </div>
+                            </div>
+
+                            <!-- Kamar Mandi -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Kamar Mandi</label>
+                                    <input type="number" name="jumlah_kamar_mandi" class="form-control" value="{{ $tipeRumah->jumlah_kamar_mandi }}" required>
+                                </div>
+                            </div>
+
+                            <!-- Bonus -->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="form-control-label">Isi</label>
-                                    <textarea name="isi" class="form-control" rows="5" required>{{ $artikel->isi }}</textarea>
+                                    <label>Bonus</label>
+                                    <textarea name="fasilitas_unggulan" rows="3" class="form-control" required>{{ $tipeRumah->fasilitas_unggulan }}</textarea>
                                 </div>
                             </div>
 
-                            <!-- Gambar -->
+                            <!-- Promo -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Promo</label>
+                                    <select name="is_promo" class="form-control" required>
+                                        <option value="0" {{ $tipeRumah->is_promo == 0 ? 'selected' : '' }}>Tidak</option>
+                                        <option value="1" {{ $tipeRumah->is_promo == 1 ? 'selected' : '' }}>Ya</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Upload Gambar -->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="form-control-label">Gambar (kosongkan jika tidak diubah)</label>
-                                    <input type="file" name="gambar" class="form-control" accept="image/*">
-                                    @if($artikel->gambar)
-                                        <small>Gambar saat ini: <br><img src="{{ asset('storage/' . $artikel->gambar) }}" alt="gambar" width="100"></small>
+                                    <label>Gambar Baru (kosongkan jika tidak diubah)</label>
+                                    <input type="file" name="gambar[]" class="form-control" accept="image/*" multiple>
+                                    @if ($tipeRumah->gambarRumah->count())
+                                        <div class="mt-2">
+                                            <small>Gambar Saat Ini:</small><br>
+                                            @foreach($tipeRumah->gambarRumah as $gambar)
+                                                <img src="{{ asset('storage/' . $gambar->nama_file) }}" alt="gambar rumah" width="100" class="me-2 mb-2">
+                                            @endforeach
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -82,7 +125,7 @@
 
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Update</button>
-                        <a href="{{ route('artikel.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
+                        <a href="{{ route('tipe_rumah.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
                     </form>
                 </div>
             </div>
