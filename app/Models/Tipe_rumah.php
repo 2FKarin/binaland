@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tipe_rumah extends Model
 {
     protected $table = 'tipe_rumah';
-    protected $primaryKey = 'id_tipe_lokasi';
+    protected $primaryKey = 'id_tipe_rumah';
+    public $timestamps = false;
     protected $fillable = [
-        'id_tipe_rumah', 'id_tipe_lokasi', 'nama_tipe', 'luas_bangunan', 'luas_tanah', 'harga', 'jumlah_kamar', 'jumlah_kamar_mandi', 'fasilitas_unggunan', 'bonus', 'is_promo'
+        'id_tipe_rumah', 'fk_id_lokasi', 'nama_tipe', 'luas_bangunan', 'luas_tanah', 'harga', 'jumlah_kamar', 'jumlah_kamar_mandi', 'fasilitas_unggulan', 'is_promo'
     ];
 
     public function lokasi()
