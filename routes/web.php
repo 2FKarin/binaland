@@ -26,7 +26,9 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\LokasiController;
-use App\Http\Controllers\TipeRumahController;       
+use App\Http\Controllers\TipeRumahController; 
+use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\ReservasiSurveyController;       
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -62,6 +64,22 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::put('/tipe_rumah/{id}', [TipeRumahController::class, 'update'])->name('tipe_rumah.update')->middleware('auth');
 	Route::delete('/tipe_rumah/destroy/{id}', [TipeRumahController::class, 'destroy'])->name('tipe_rumah.destroy')->middleware('auth');
 	Route::get('/tipe_rumah/detail/{id}', [TipeRumahController::class, 'detail'])->name('tipe_rumah.detail')->middleware('auth');
+	// Menu Fasilitas dan Gambarnya
+	Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.layout')->middleware('auth');
+	Route::get('/fasilitas/add', [FasilitasController::class, 'add'])->name('fasilitas.add')->middleware('auth');
+	Route::post('/fasilitas/store', [FasilitasController::class, 'store'])->name('fasilitas.store')->middleware('auth');
+	Route::get('/fasilitas/edit/{id}', [FasilitasController::class, 'edit'])->name('fasilitas.edit')->middleware('auth');
+	Route::put('/fasilitas/{id}', [FasilitasController::class, 'update'])->name('fasilitas.update')->middleware('auth');
+	Route::delete('/fasilitas/destroy/{id}', [FasilitasController::class, 'destroy'])->name('fasilitas.destroy')->middleware('auth');
+	Route::get('/fasilitas/detail/{id}', [FasilitasController::class, 'detail'])->name('fasilitas.detail')->middleware('auth');
+	// Menu Reservasi-Survey dan Reservasi-Lokasi
+	Route::get('/reservasi_survey', [ReservasiSurveyController::class, 'index'])->name('reservasi_survey.layout')->middleware('auth');
+	Route::get('/reservasi_survey/add', [ReservasiSurveyController::class, 'add'])->name('reservasi_survey.add')->middleware('auth');
+	Route::post('/reservasi_survey/store', [ReservasiSurveyController::class, 'store'])->name('reservasi_survey.store')->middleware('auth');
+	Route::get('/reservasi_survey/edit/{id}', [ReservasiSurveyController::class, 'edit'])->name('reservasi_survey.edit')->middleware('auth');
+	Route::put('/reservasi_survey/{id}', [ReservasiSurveyController::class, 'update'])->name('reservasi_survey.update')->middleware('auth');
+	Route::delete('/reservasi_survey/destroy/{id}', [ReservasiSurveyController::class, 'destroy'])->name('reservasi_survey.destroy')->middleware('auth');
+	Route::get('/reservasi_survey/detail/{id}', [ReservasiSurveyController::class, 'detail'])->name('reservasi_survey.detail')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
