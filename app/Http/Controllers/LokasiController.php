@@ -106,7 +106,7 @@ public function update(Request $request, $id)
                 $namaFile = time() . '_' . $file->getClientOriginalName();
                 $file->storeAs('public/uploads', $namaFile);
 
-                GambarLokasi::create([
+                Gambar_lokasi::create([
                     'fk_id_lokasi' => $lokasi->id,
                     'nama_file' => $namaFile,
                 ]);
