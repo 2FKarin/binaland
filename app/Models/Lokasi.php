@@ -26,4 +26,8 @@ class Lokasi extends Model
     {
         return $this->hasMany(Tipe_rumah::class, 'fk_id_lokasi', 'id_lokasi');
     }
+    public function fasilitas()
+    {
+        return $this->hasMany(Fasilitas::class, 'fk_id_lokasi', 'id_lokasi');
+    }
 }
