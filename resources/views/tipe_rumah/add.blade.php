@@ -31,7 +31,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Tipe Rumah</label>
-                                    <input type="text" name="nama_lokasi" class="form-control" required>
+                                    <input type="text" name="nama_tipe" class="form-control" required>
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@
                             <!-- Bonus -->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Bonus</label>
+                                    <label>Fasilitas Unggulan</label>
                                     <textarea name="fasilitas_unggulan" rows="3" class="form-control" required></textarea>
                                 </div>
                             </div>
