@@ -16,4 +16,8 @@ class Reservasi_survey extends Model
     {
         return $this->hasOne(Reservasi_lokasi::class, 'fk_id_reservasi');
     }
+    public function reservasiLokasi()
+    {
+        return $this->hasOne(Reservasi_lokasi::class, 'fk_id_reservasi');
+    }
 }
