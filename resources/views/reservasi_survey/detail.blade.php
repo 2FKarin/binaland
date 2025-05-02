@@ -8,9 +8,16 @@
         <div class="col-md-8">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h4 class="text-center card-title">Reservasi oleh {{ $reservasi->nama_pemesan }}</h4>
-                    <!-- <p class="text-muted mb-1"><strong>Lokasi:</strong> {{ $reservasi->lokasi->nama_lokasi ?? '-' }}</p>
-                    <p class="text-muted mb-1"><strong>Alamat Lokasi:</strong> {{ $reservasi->lokasi->alamat ?? '-' }}</p> -->
+                    @if($reservasi->reservasiLokasi && $reservasi->reservasiLokasi->lokasi->gambarLokasi->isNotEmpty())
+                        <div class="d-flex flex-wrap justify-content-center p-3">
+                            @foreach ($reservasi->reservasiLokasi->lokasi->gambarLokasi as $gambar)
+                                <img src="{{ asset('storage/' . $gambar->gambar) }}" class="img-thumbnail m-1" style="max-width: 200px;" alt="Gambar Lokasi">
+                            @endforeach
+                        </div>
+                    @endif
+                    <h4 class="text-center card-title">Reservasi Oleh {{ $reservasi->nama_pemesan }}</h4>
+                    <p class="text-muted mb-1"><strong>Lokasi:</strong> {{ $reservasi->lokasi->nama_lokasi ?? '-' }}</p>
+                    <!-- <p class="text-muted mb-1"><strong>Alamat Lokasi:</strong> {{ $reservasi->lokasi->alamat ?? '-' }}</p> -->
                     <p class="text-muted mb-1"><strong>No. HP:</strong> {{ $reservasi->nomor_telepon }}</p>
                     <p class="text-muted mb-1"><strong>Email:</strong> {{ $reservasi->email }}</p>
                     <p class="text-muted mb-1"><strong>Tanggal Survey:</strong> {{ \Carbon\Carbon::parse($reservasi->tanggal_survey)->format('d-m-Y') }}</p>
