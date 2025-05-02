@@ -7,6 +7,7 @@ class Gambar_rumah extends Model
 {
     protected $table = 'gambar_rumah';
     protected $primaryKey = 'id_gambar';
+    public $timestamps = false;
     protected $fillable = [
         'id_gambar', 'fk_id_tipe_rumah', 'gambar'
     ];
