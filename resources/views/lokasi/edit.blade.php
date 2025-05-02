@@ -137,11 +137,7 @@
             }
         });
 
-        // Load kabupaten dan kecamatan awal jika provinsi & kota sudah ada
-        @if ($lokasi->provinsi && $lokasi->kota && $lokasi->kecamatan)
-            loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/{{ $lokasi->provinsi }}.json`, "kota", "{{ $lokasi->kota }}");
-            loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/{{ $lokasi->kota }}.json`, "kecamatan", "{{ $lokasi->kecamatan }}");
-        @endif
+        
     });
 
     function loadDropdown(url, elementId, selectedValue = '') {
