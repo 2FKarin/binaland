@@ -63,63 +63,63 @@ class LokasiController extends Controller
     }
 
     public function edit($id)
-{
-    $lokasi = Lokasi::with('gambarLokasi')->findOrFail($id);
-    return view('lokasi.edit', compact('lokasi'));
-}
+    {
+        $lokasi = Lokasi::with('gambarLokasi')->findOrFail($id);
+        return view('lokasi.edit', compact('lokasi'));
+    }
 
 public function update(Request $request, $id)
-{
-    $request->validate([
-        'nama_lokasi' => 'required|string|max:255',
-        'company' => 'required|string|max:255',
-        'deskripsi' => 'required|string',
-        'provinsi' => 'required|string',
-        'kota' => 'required|string',
-        'kecamatan' => 'required|string',
-        'alamat' => 'required|string',
-        'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-    ]);
-
-    DB::beginTransaction();
-    try {
-        $lokasi = Lokasi::findOrFail($id);
-        $lokasi->update([
-            'nama_lokasi' => $request->nama_lokasi,
-            'company' => $request->company,
-            'deskripsi' => $request->deskripsi,
-            'provinsi' => $request->provinsi,
-            'kota' => $request->kota,
-            'kecamatan' => $request->kecamatan,
-            'alamat' => $request->alamat,
+    {
+        $request->validate([
+            'nama_lokasi' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'alamat' => 'required|string',
+            'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        if ($request->hasFile('gambar')) {
-            // Hapus gambar lama (jika perlu)
-            foreach ($lokasi->gambarLokasi as $gambar) {
-                Storage::delete('public/uploads/' . $gambar->nama_file);
-                $gambar->delete();
+        DB::beginTransaction();
+        try {
+            $lokasi = Lokasi::findOrFail($id);
+            $lokasi->update([
+                'nama_lokasi' => $request->nama_lokasi,
+                'company' => $request->company,
+                'deskripsi' => $request->deskripsi,
+                'provinsi' => $request->provinsi,
+                'kota' => $request->kota,
+                'kecamatan' => $request->kecamatan,
+                'alamat' => $request->alamat,
+            ]);
+
+            if ($request->hasFile('gambar')) {
+                // Hapus gambar lama
+                foreach ($lokasi->gambarLokasi as $gambar) {
+                    Storage::disk('public')->delete($gambar->gambar);
+                    $gambar->delete();
+                }
+
+                // Upload gambar baru, simpan path
+                foreach ($request->file('gambar') as $file) {
+                    $path = $file->store('lokasi', 'public');
+
+                    Gambar_lokasi::create([
+                        'fk_id_lokasi' => $lokasi->id_lokasi, // atau $lokasi->id sesuai strukturmu
+                        'gambar' => $path,
+                    ]);
+                }
             }
 
-            // Upload gambar baru
-            foreach ($request->file('gambar') as $file) {
-                $namaFile = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/uploads', $namaFile);
-
-                Gambar_lokasi::create([
-                    'fk_id_lokasi' => $lokasi->id,
-                    'nama_file' => $namaFile,
-                ]);
-            }
+            DB::commit();
+            return redirect()->route('lokasi.layout')->with('success', 'Data lokasi berhasil diperbarui!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        DB::commit();
-        return redirect()->route('lokasi.layout')->with('success', 'Data lokasi berhasil diperbarui!');
-    } catch (\Exception $e) {
-        DB::rollback();
-        return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
-}
+
 
     public function destroy($id)
     {
