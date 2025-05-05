@@ -25,7 +25,6 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <!-- Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Lokasi</label>
@@ -39,16 +38,12 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Nama Fasilitas -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Fasilitas</label>
                                     <input type="text" name="nama_fasilitas" value="{{ $fasilitas->nama_fasilitas }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Upload Gambar Baru -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Gambar Baru (Opsional)</label>
@@ -56,8 +51,6 @@
                                     <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar</small>
                                 </div>
                             </div>
-
-                            <!-- Gambar Lama -->
                             <div class="col-12">
                                 <label>Gambar Lama</label>
                                 <div class="row">
@@ -69,7 +62,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Update</button>
                         <a href="{{ route('fasilitas.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
