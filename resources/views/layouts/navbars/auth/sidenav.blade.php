@@ -30,19 +30,19 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'lokasi.layout' ? 'active' : '' }}" href="{{ route('lokasi.layout') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-pin-3 text-info text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Lokasi</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'tipe_rumah.layout' ? 'active' : '' }}" href="{{ route('tipe_rumah.layout') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-building text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Tipe Rumah</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'lokasi.layout' ? 'active' : '' }}" href="{{ route('lokasi.layout') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-pin-3  text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Lokasi</span>
                 </a>
             </li>
             <li class="nav-item">
