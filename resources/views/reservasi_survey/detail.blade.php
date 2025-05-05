@@ -16,8 +16,11 @@
                         </div>
                     @endif
                     <h4 class="text-center card-title">Reservasi Oleh {{ $reservasi->nama_pemesan }}</h4>
-                    <p class="text-muted mb-1"><strong>Lokasi:</strong> {{ $reservasi->lokasi->nama_lokasi ?? '-' }}</p>
-                    <!-- <p class="text-muted mb-1"><strong>Alamat Lokasi:</strong> {{ $reservasi->lokasi->alamat ?? '-' }}</p> -->
+                    <p class="text-muted mb-1"><strong>Data Lokasi</strong></p>
+                    <p class="text-muted mb-1"><strong>Lokasi:</strong> {{ $reservasi->reservasiLokasi->lokasi->nama_lokasi ?? '-' }}</p>
+                    <p class="text-muted mb-1"><strong>Alamat Lokasi:</strong> {{ $reservasi->reservasiLokasi->lokasi->alamat ?? '-' }}</p>
+                    <br>
+                    <p class="text-muted mb-1"><strong>Data Pemesan</strong></p>
                     <p class="text-muted mb-1"><strong>No. HP:</strong> {{ $reservasi->nomor_telepon }}</p>
                     <p class="text-muted mb-1"><strong>Email:</strong> {{ $reservasi->email }}</p>
                     <p class="text-muted mb-1"><strong>Tanggal Survey:</strong> {{ \Carbon\Carbon::parse($reservasi->tanggal_survey)->format('d-m-Y') }}</p>
