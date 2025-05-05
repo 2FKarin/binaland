@@ -23,7 +23,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fasilitas</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
+                                    <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th> -->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
@@ -36,19 +36,19 @@
                                             {{ $tipe->luas_bangunan }} m² <br>
                                             {{ $tipe->luas_tanah }} m²
                                         </td>
-                                        <td class="text-center">Rp{{ number_format($tipe->harga, 0, ',', '.') }}</td>
+                                        <td class="text-center">Rp {{ number_format($tipe->harga, 0, ',', '.') }}</td>
                                         <td class="text-start">
                                             {{ $tipe->jumlah_kamar }} Kamar<br>
                                             {{ $tipe->jumlah_kamar_mandi }} K. Mandi
                                         </td>
                                         <td class="text-start" style="white-space: pre-line;">{{ $tipe->fasilitas_unggulan }}</td>
-                                        <td class="lebar-tabel text-center">
+                                        <!-- <td class="lebar-tabel text-center">
                                             <div style="max-height: 100px; overflow-y: auto;" class="d-flex flex-wrap justify-content-center">
                                                 @foreach ($tipe->gambarRumah as $gambar)
                                                     <img src="{{ asset('storage/' . $gambar->gambar) }}" width="100" class="m-1 rounded">
                                                 @endforeach
                                             </div>
-                                        </td>
+                                        </td> -->
                                         <td class="lebar-tabel1 text-center">
                                             <a href="{{ route('tipe_rumah.edit', $tipe->id_tipe_rumah) }}" class="btn bg-gradient-info btn-sm">Edit</a>
                                             <form action="{{ route('tipe_rumah.destroy', $tipe->id_tipe_rumah) }}" method="POST" style="display:inline;">
