@@ -117,8 +117,12 @@ class ReservasiSurveyController extends Controller
     
     public function destroy($id)
     {
-        $reservasi = Reservasi_lokasi::findOrFail($id);
-        $reservasi->delete();
+        $reservasiLokasi = Reservasi_lokasi::findOrFail($id);
+        $reservasiSurvey = Reservasi_survey::find($reservasiLokasi->fk_id_reservasi);
+        if ($reservasiSurvey) {
+            $reservasiSurvey->delete();
+        }
+        $reservasiLokasi->delete();
 
         return redirect()->route('reservasi_survey.layout')->with('success', 'Data berhasil dihapus');
     }
