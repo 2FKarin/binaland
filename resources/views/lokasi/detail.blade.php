@@ -21,6 +21,7 @@
                     <p class="card-text" style="white-space: pre-line;">{{ $lokasi->deskripsi }}</p>
                     <p class="text-muted mb-1"><strong>Provinsi:</strong> {{ $lokasi->provinsi }}</p>
                     <p class="text-muted mb-1"><strong>Kota:</strong> {{ $lokasi->kota }}</p>
+                    <p class="text-muted mb-1"><strong>Kecamatan:</strong> {{ $lokasi->kecamatan }}</p>
                     <p class="text-muted mb-1"><strong>Alamat:</strong> {{ $lokasi->alamat }}</p>
                 </div>
                 <div class="card-footer text-end bg-white">
