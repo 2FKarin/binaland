@@ -23,7 +23,6 @@
                     <form action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <!-- Company -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Company</label>
@@ -34,40 +33,30 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Kategori -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Kategori</label>
                                     <input type="text" name="kategori" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Judul -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Judul</label>
                                     <input type="text" name="judul" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Tanggal -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Tanggal</label>
                                     <input type="date" name="tanggal" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Isi -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Isi</label>
                                     <textarea name="isi" class="form-control" rows="5" required></textarea>
                                 </div>
                             </div>
-
-                            <!-- Gambar -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Gambar</label>
@@ -75,7 +64,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Tambah</button>
                         <a href="{{ route('artikel.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
