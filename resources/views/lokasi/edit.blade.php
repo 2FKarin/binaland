@@ -121,34 +121,39 @@
         loadDropdown("https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json", "provinsi", "{{ $lokasi->provinsi }}");
 
         $("#provinsi").on("change", function () {
-            let provinsiId = this.value;
+            let selected = this.options[this.selectedIndex];
+            let provinsiId = selected.getAttribute('data-id');
+
             resetDropdown("kota");
             resetDropdown("kecamatan");
+
             if (provinsiId) {
-                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`, "kota");
+                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`, "kota", "{{ $lokasi->kota }}");
             }
         });
 
         $("#kota").on("change", function () {
-            let kotaId = this.value;
+            let selected = this.options[this.selectedIndex];
+            let kotaId = selected.getAttribute('data-id');
+
             resetDropdown("kecamatan");
+
             if (kotaId) {
-                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`, "kecamatan");
+                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`, "kecamatan", "{{ $lokasi->kecamatan }}");
             }
         });
-
-        
     });
 
-    function loadDropdown(url, elementId, selectedValue = '') {
+    function loadDropdown(url, elementId, selectedName = '') {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 let select = document.getElementById(elementId);
                 select.innerHTML = "<option value=''>Pilih</option>";
                 data.forEach(item => {
-                    let option = new Option(item.name, item.id);
-                    if (item.id == selectedValue) {
+                    let option = new Option(item.name, item.name);
+                    option.setAttribute('data-id', item.id);
+                    if (item.name === selectedName) {
                         option.selected = true;
                     }
                     select.add(option);
