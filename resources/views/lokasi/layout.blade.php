@@ -30,15 +30,15 @@
                                     <tr>
                                         <td class="text-center">{{ $row->nama_lokasi }}</td>
                                         <td class="text-center">{{ $row->company }}</td>
-                                        <td class="lebar-tabel text-center">{{ $row->alamat }}</td>
-                                        <td class="lebar-tabel1 text-center" >
+                                        <td class="lebar-tabel1 text-center">{{ $row->alamat }}</td>
+                                        <td class="lebar-tabel text-center" >
                                             <div style="max-height: 100px; overflow-y: auto;" class="d-flex flex-wrap justify-content-center">
                                                 @foreach ($row->gambarLokasi as $gambar)
                                                     <img src="{{ asset('storage/' . $gambar->gambar) }}" width="100" class="m-1 rounded">
                                                 @endforeach
                                             </div>
                                         </td>
-                                        <td class="lebar-tabel1 text-center">
+                                        <td class="lebar-tabel text-center">
                                             <a href="{{ route('lokasi.edit', $row->id_lokasi) }}" class="btn bg-gradient-info btn-sm">Edit
                                             </a>
                                             <form action="{{ route('lokasi.destroy', $row->id_lokasi) }}" method="POST" style="display:inline;">
@@ -68,11 +68,11 @@
 <style>
     .lebar-tabel {
         white-space: normal !important;
-        max-width: 200px;
+        max-width: 100px;
     }
     .lebar-tabel1 {
         white-space: normal !important;
-        max-width: 120px;
+        max-width: 200px;
     }
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
