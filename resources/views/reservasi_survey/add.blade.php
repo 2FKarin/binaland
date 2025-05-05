@@ -80,9 +80,9 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select name="status" class="form-control" required>
-                                        <option value="pending">Pending</option>
-                                        <option value="dikonfirmasi">Dikonfirmasi</option>
-                                        <option value="batal">Batal</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Dikonfirmasi">Dikonfirmasi</option>
+                                        <option value="Dibatalkan">Batal</option>
                                     </select>
                                 </div>
                             </div>
