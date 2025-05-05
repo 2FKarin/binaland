@@ -15,15 +15,12 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <!-- Nama Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Lokasi</label>
                                     <input type="text" name="nama_lokasi" class="form-control" value="{{ $lokasi->nama_lokasi }}" required>
                                 </div>
                             </div>
-
-                            <!-- Company -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Perusahaan</label>
@@ -34,16 +31,12 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Deskripsi -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <textarea name="deskripsi" rows="4" class="form-control" required>{{ $lokasi->deskripsi }}</textarea>
                                 </div>
                             </div>
-
-                            <!-- Provinsi -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Provinsi</label>
@@ -52,8 +45,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Kabupaten / Kota -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Kabupaten / Kota</label>
@@ -62,8 +53,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Kecamatan -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Kecamatan</label>
@@ -72,16 +61,12 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Alamat -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Alamat</label>
                                     <textarea name="alamat" rows="2" class="form-control" required>{{ $lokasi->alamat }}</textarea>
                                 </div>
                             </div>
-
-                            <!-- Gambar Lama -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Gambar Lokasi Saat Ini</label><br>
@@ -90,8 +75,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
-                            <!-- Upload Gambar Baru -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Gambar Baru (opsional)</label>
@@ -100,7 +83,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Update</button>
                         <a href="{{ route('lokasi.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
