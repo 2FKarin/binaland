@@ -60,8 +60,6 @@ class TipeRumahController extends Controller
         return redirect()->route('tipe_rumah.layout')->with('success', 'Tipe rumah berhasil ditambahkan.');
     }
 
-    // Tambahan fungsi untuk CRUD lainnya
-
     public function detail($id)
     {
         $tipeRumah = Tipe_rumah::with(['gambarRumah', 'lokasi'])->findOrFail($id);
@@ -123,6 +121,5 @@ class TipeRumahController extends Controller
         }
     
         return redirect()->route('tipe_rumah.layout')->with('success', 'Tipe rumah berhasil diperbarui.');
-    }
-    
+    }  
 }
