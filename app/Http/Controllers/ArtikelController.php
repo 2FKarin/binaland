@@ -16,6 +16,7 @@ class ArtikelController extends Controller
     {
         return view('artikel.add');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -26,11 +27,7 @@ class ArtikelController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'tanggal' => 'required|date',
         ]);
-
-        // Simpan gambar
         $gambarPath = $request->file('gambar')->store('artikel', 'public');
-
-        // Insert data ke database
         Artikel::create([
             'company' => $request->company,
             'kategori' => $request->kategori,
@@ -45,14 +42,13 @@ class ArtikelController extends Controller
 
     public function edit($id)
     {
-        $artikel = Artikel::findOrFail($id); // gunakan id_artikel kalau pakai custom primary key
+        $artikel = Artikel::findOrFail($id);
         return view('artikel.edit', compact('artikel'));
     }
 
     public function update(Request $request, $id)
     {
         $artikel = Artikel::findOrFail($id);
-
         $request->validate([
             'company' => 'required',
             'kategori' => 'required',
