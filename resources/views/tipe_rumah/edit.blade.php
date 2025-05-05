@@ -25,7 +25,6 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <!-- Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Lokasi</label>
@@ -39,64 +38,48 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Nama Tipe Rumah -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Tipe Rumah</label>
                                     <input type="text" name="nama_tipe" value="{{ $tipeRumah->nama_tipe }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Luas Bangunan -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Luas Bangunan (m²)</label>
                                     <input type="number" name="luas_bangunan" value="{{ $tipeRumah->luas_bangunan }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Luas Tanah -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Luas Tanah (m²)</label>
                                     <input type="number" name="luas_tanah" value="{{ $tipeRumah->luas_tanah }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Harga -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Harga</label>
                                     <input type="number" name="harga" value="{{ $tipeRumah->harga }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Jumlah Kamar -->
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Jumlah Kamar</label>
                                     <input type="number" name="jumlah_kamar" value="{{ $tipeRumah->jumlah_kamar }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Jumlah Kamar Mandi -->
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Kamar Mandi</label>
                                     <input type="number" name="jumlah_kamar_mandi" value="{{ $tipeRumah->jumlah_kamar_mandi }}" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Bonus -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Bonus</label>
                                     <textarea name="fasilitas_unggulan" rows="3" class="form-control" required>{{ $tipeRumah->fasilitas_unggulan }}</textarea>
                                 </div>
                             </div>
-
-                            <!-- Promo -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Promo</label>
@@ -106,8 +89,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Upload Gambar Baru -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Gambar Baru (Opsional)</label>
@@ -115,8 +96,6 @@
                                     <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar</small>
                                 </div>
                             </div>
-
-                            <!-- Gambar Lama -->
                             <div class="col-12">
                                 <label>Gambar Lama</label>
                                 <div class="row">
@@ -128,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Update</button>
                         <a href="{{ route('tipe_rumah.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
