@@ -22,7 +22,6 @@ class LokasiController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi sederhana
         $request->validate([
             'nama_lokasi' => 'required',
             'company' => 'required',
@@ -33,8 +32,6 @@ class LokasiController extends Controller
             'alamat' => 'required',
             'gambar.*' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
-
-        // 1. Simpan lokasi terlebih dahulu
         $lokasi = Lokasi::create([
             'nama_lokasi' => $request->nama_lokasi,
             'company' => $request->company,
@@ -44,14 +41,11 @@ class LokasiController extends Controller
             'kecamatan' => $request->kecamatan,
             'alamat' => $request->alamat
         ]);
-
-        // 2. Ambil ID lokasi baru untuk digunakan pada gambar
         $lokasiId = $lokasi->id_lokasi;
 
-        // 3. Simpan gambar-gambar
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $file) {
-                $path = $file->store('lokasi', 'public'); // simpan ke storage/app/public/lokasi
+                $path = $file->store('lokasi', 'public');
                 Gambar_lokasi::create([
                     'fk_id_lokasi' => $lokasiId,
                     'gambar' => $path
@@ -68,7 +62,7 @@ class LokasiController extends Controller
         return view('lokasi.edit', compact('lokasi'));
     }
 
-public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_lokasi' => 'required|string|max:255',
@@ -95,18 +89,16 @@ public function update(Request $request, $id)
             ]);
 
             if ($request->hasFile('gambar')) {
-                // Hapus gambar lama
                 foreach ($lokasi->gambarLokasi as $gambar) {
                     Storage::disk('public')->delete($gambar->gambar);
                     $gambar->delete();
                 }
 
-                // Upload gambar baru, simpan path
                 foreach ($request->file('gambar') as $file) {
                     $path = $file->store('lokasi', 'public');
 
                     Gambar_lokasi::create([
-                        'fk_id_lokasi' => $lokasi->id_lokasi, // atau $lokasi->id sesuai strukturmu
+                        'fk_id_lokasi' => $lokasi->id_lokasi,
                         'gambar' => $path,
                     ]);
                 }
