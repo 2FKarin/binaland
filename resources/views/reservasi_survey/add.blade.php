@@ -14,7 +14,6 @@
                     <form action="{{ route('reservasi_survey.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <!-- Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Lokasi</label>
@@ -26,56 +25,42 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Pemesan -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Pemesan</label>
                                     <input type="text" name="nama_pemesan" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Telepon -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nomor Telepon</label>
                                     <input type="text" name="nomor_telepon" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Email -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="email" name="email" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Tanggal Survey -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tanggal Survey</label>
                                     <input type="date" name="tanggal_survey" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Jam Survey -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Jam Survey</label>
                                     <input type="time" name="jam_survey" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Catatan -->
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Catatan</label>
                                     <textarea name="catatan" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
-
-                            <!-- Status -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Status</label>
@@ -87,7 +72,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                         <a href="{{ route('reservasi_survey.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
