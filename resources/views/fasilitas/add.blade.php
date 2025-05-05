@@ -14,7 +14,6 @@
                     <form action="{{ route('fasilitas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <!-- Lokasi -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Lokasi</label>
@@ -26,16 +25,12 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Nama Fasilitas -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Fasilitas</label>
                                     <input type="text" name="nama_fasilitas" class="form-control" required>
                                 </div>
                             </div>
-
-                            <!-- Upload Gambar -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Gambar Fasilitas</label>
@@ -44,7 +39,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <hr class="horizontal dark mt-4">
                         <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                         <a href="{{ route('fasilitas.layout') }}" class="btn btn-secondary btn-sm">Kembali</a>
