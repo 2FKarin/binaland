@@ -32,8 +32,8 @@
                                         <img src="{{ asset('storage/' . $row->gambar) }}" width="100">
                                         </td>
                                         <td class="text-center">{{ $row->company }}</td>
-                                        <td class="lebar-tabel text-center">{{ $row->kategori }}</td>
-                                        <td class="lebar-tabel text-center">{{ $row->judul }}</td>
+                                        <td class="text-center">{{ $row->kategori }}</td>
+                                        <td class="lebar1-tabel text-center">{{ $row->judul }}</td>
                                         <td class="text-center">{{ \Carbon\Carbon::parse($row->tanggal)->format('d-m-Y') }}</td>
                                         <td class="lebar-tabel text-center">
                                             <a href="{{ route('artikel.edit', $row->id_artikel) }}" class="btn bg-gradient-info btn-sm">Edit
@@ -64,7 +64,11 @@
 <style>
     .lebar-tabel {
         white-space: normal !important;
-        max-width: 1000px;
+        max-width: 100px;
+    }
+    .lebar-tabel1 {
+        white-space: normal !important;
+        max-width: 250px;
     }
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
