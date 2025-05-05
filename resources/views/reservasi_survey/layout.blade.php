@@ -20,10 +20,10 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemesan</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telepon</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                    <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th> -->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jam</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Catatan</th>
+                                    <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Catatan</th> -->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
@@ -34,13 +34,17 @@
                                         <td class="text-center">{{ $item->lokasi->nama_lokasi }}</td>
                                         <td class="text-center">{{ $item->survey->nama_pemesan }}</td>
                                         <td class="text-center">{{ $item->survey->nomor_telepon }}</td>
-                                        <td class="text-center">{{ $item->survey->email }}</td>
+                                        <!-- <td class="text-center">{{ $item->survey->email }}</td> -->
                                         <td class="text-center">{{ $item->survey->tanggal_survey }}</td>
                                         <td class="text-center">{{ $item->survey->jam_survey }}</td>
-                                        <td class="text-center">{{ $item->survey->catatan }}</td>
+                                        <!-- <td class="text-center">{{ $item->survey->catatan }}</td> -->
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-sm 
-                                                {{ $item->survey->status == 'pending' ? 'btn-warning' : ($item->survey->status == 'dikomfirmasi' ? 'btn-success' : 'btn-danger') }}">
+                                            <a href="#" class="badge 
+                                                {{ 
+                                                    $item->survey->status == 'Pending' ? 'bg-warning' : 
+                                                    ($item->survey->status == 'Dikonfirmasi' ? 'bg-success' : 
+                                                    ($item->survey->status == 'Dibatalkan' ? 'bg-danger' : 'bg-secondary')) 
+                                                }}">
                                                 {{ ucfirst($item->survey->status) }}
                                             </a>
                                         </td>
