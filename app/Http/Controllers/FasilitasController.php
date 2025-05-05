@@ -27,13 +27,11 @@ class FasilitasController extends Controller
             'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
-        // Simpan fasilitas
         $fasilitas = Fasilitas::create([
             'fk_id_lokasi' => $request->fk_id_lokasi,
             'nama_fasilitas' => $request->nama_fasilitas,
         ]);
     
-        // Upload dan simpan gambar
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $file) {
                 $path = $file->store('fasilitas', 'public');
@@ -69,7 +67,6 @@ class FasilitasController extends Controller
             'nama_fasilitas' => $request->nama_fasilitas,
         ]);
 
-        // Upload gambar baru jika ada
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $file) {
                 $path = $file->store('gambar_fasilitas', 'public');
