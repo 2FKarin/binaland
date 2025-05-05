@@ -112,19 +112,25 @@
         loadDropdown("https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json", "provinsi");
 
         $("#provinsi").on("change", function () {
-            let provinsiId = this.value;
+            let selected = this.options[this.selectedIndex];
+            let provinsiId = selected.getAttribute('data-id');
+
             resetDropdown("kota");
             resetDropdown("kecamatan");
+
             if (provinsiId) {
                 loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`, "kota");
             }
         });
 
         $("#kota").on("change", function () {
-            let kabupatenId = this.value;
+            let selected = this.options[this.selectedIndex];
+            let kotaId = selected.getAttribute('data-id');
+
             resetDropdown("kecamatan");
-            if (kabupatenId) {
-                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kabupatenId}.json`, "kecamatan");
+
+            if (kotaId) {
+                loadDropdown(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`, "kecamatan");
             }
         });
     });
@@ -136,7 +142,8 @@
                 let select = document.getElementById(elementId);
                 select.innerHTML = "<option value=''>Pilih</option>";
                 data.forEach(item => {
-                    let option = new Option(item.name, item.id);
+                    let option = new Option(item.name, item.name);
+                    option.setAttribute('data-id', item.id);
                     select.add(option);
                 });
                 $(`#${elementId}`).select2();
